@@ -1,0 +1,299 @@
+Key,Title,Type,Epic,Workstream,Priority,EstimateHours,Dependencies,Labels,Body,Assignee,Status,Findings
+POC-001,"Kickoff: confirm scope, page list (<10), and demo success criteria",chore,Foundations,PM,P0,2,,"type: chore,ws: pm,priority: P0","## Summary
+Align on the *exact* POC scope and what “done” means for the demo.
+
+## Acceptance criteria
+- [ ] Confirm the page list is **<= 10 pages**
+- [ ] Confirm what is **mocked** (payment + QR) and what is **real** (barcode scan + points accrual)
+- [ ] Agree on the demo script (happy path) and test data needs
+- [ ] Record decisions in README / docs
+
+## Notes
+Keep the POC non-production: prioritize fast learning + working demo over perfection.",,Needs Verification,No scope/decision doc found; README is still the Vite template.
+POC-002,"Repo hygiene: eslint/prettier, conventional commits, env var template, basic folder structure",chore,Foundations,Frontend,P0,6,POC-001,"type: chore,ws: foundation,priority: P0","## Summary
+Standardize the repo so 5 people can work in parallel with minimal friction.
+
+## Acceptance criteria
+- [ ] ESLint + Prettier configured and running
+- [ ] `README` includes local dev steps
+- [ ] `.env.example` added (no secrets committed)
+- [ ] Folder structure agreed (e.g., `src/pages`, `src/components`, `src/lib`, `convex/`)
+
+## Notes
+Aim for “good enough” conventions that reduce merge conflicts.",,Partial,ESLint config exists; no Prettier; no .env.example; README not updated for this app.
+POC-003,Scaffold app: Vite + React + TS + Router + ShadCN UI baseline,feature,Foundations,Frontend,P0,10,POC-002,"type: feature,ws: frontend,priority: P0","## Summary
+Create the baseline web app and UI kit plumbing.
+
+## Acceptance criteria
+- [ ] Vite + React + TypeScript app runs locally
+- [ ] Routing in place for planned pages
+- [ ] ShadCN UI installed + one sample page using components
+- [ ] Global layout + theme basics (light/dark optional)
+
+## Notes
+Keep to the planned page list (<=10).",,Partial,Vite + React + TS + router present; shadcn-style UI components in src/ui; needs run verification.
+POC-004,"Convex setup: project init, local dev flow, and React client connection",feature,Foundations,Backend,P0,6,POC-002,"type: feature,ws: backend,priority: P0","## Summary
+Initialize Convex and wire it into the React app.
+
+## Acceptance criteria
+- [ ] Convex project created and running locally
+- [ ] React app can call at least one Convex query
+- [ ] Dev workflow documented (how to run both frontend + Convex)
+
+## Notes
+Prefer simple patterns (queries/mutations) over over-engineering.",,Partial,"convex/ folder exists with sample query, but no schema.ts, no Convex client/provider, and no convex pkg in package.json."
+POC-005,Auth: integrate Clerk + protected routes + user context,feature,Auth,Frontend,P0,10,POC-003,"type: feature,ws: frontend,priority: P0","## Summary
+Integrate external authentication (Clerk) and protect app routes.
+
+## Acceptance criteria
+- [ ] Clerk configured (dev keys in `.env`)
+- [ ] Login flow works
+- [ ] Protected routes redirect to login
+- [ ] User info available to app + Convex calls (if needed)
+
+## Notes
+Keep auth minimal—just enough to identify a user and store points.",,Not Started,No Clerk dependency or provider; /login is a placeholder page.
+POC-006,"Capacitor bootstrap: wrap web app, Android platform, and build an installable APK (dev)",feature,Mobile Build,Mobile,P0,10,POC-003,"type: feature,ws: mobile,priority: P0","## Summary
+Wrap the web app with Capacitor and confirm Android build works.
+
+## Acceptance criteria
+- [ ] Capacitor configured for the project
+- [ ] Android platform added and builds successfully
+- [ ] APK can be installed on a device/emulator
+- [ ] Document the build steps (including required SDK versions)
+
+## Notes
+This is a POC—debug APK is acceptable unless you want a release APK later.",,Not Started,"No Capacitor config, android/ folder, or build scripts found."
+POC-007,Learning spike: React + Vite + TS essentials for the team,spike,Learning,Learning,P1,6,POC-001,"type: spike,ws: learning,priority: P1","## Summary
+Short, hands-on onboarding for the team to be productive in React + Vite + TS.
+
+## Acceptance criteria
+- [ ] 60–90 min walkthrough (project structure, components, hooks, routing)
+- [ ] Everyone can run the app locally and make a small UI change
+- [ ] Notes captured in `/docs/onboarding.md`
+
+## Notes
+Goal: unblock parallel work quickly.",,Not Started,No onboarding notes or docs found.
+POC-008,"Learning spike: ShadCN UI + Tailwind basics (layout, forms, toasts)",spike,Learning,Learning,P1,4,POC-003,"type: spike,ws: learning,priority: P1","## Summary
+Introduce ShadCN UI usage patterns used in this POC.
+
+## Acceptance criteria
+- [ ] Example: form + validation + toast on submit
+- [ ] Example: responsive layout + card/list patterns
+- [ ] Notes captured in `/docs/onboarding.md`",,Not Started,No shadcn/tailwind onboarding examples or docs found.
+POC-009,Learning spike: Convex data modeling + queries/mutations + auth patterns,spike,Learning,Learning,P1,6,POC-004,"type: spike,ws: learning,priority: P1","## Summary
+Get the team comfortable shipping features backed by Convex.
+
+## Acceptance criteria
+- [ ] Example query + mutation wired to UI
+- [ ] Demonstrate schema/table + indexes if needed
+- [ ] Notes captured in `/docs/onboarding.md`",,Not Started,No Convex schema or onboarding notes found.
+POC-010,"Learning spike: Clerk basics (sign-in UI, protecting routes, tokens)",spike,Learning,Learning,P2,4,POC-005,"type: spike,ws: learning,priority: P2","## Summary
+Teach how Clerk is used in this codebase.
+
+## Acceptance criteria
+- [ ] Team understands how to run locally with Clerk keys
+- [ ] Team knows where to add new protected routes",,Not Started,No Clerk setup or auth documentation found.
+POC-011,"Learning spike: Capacitor basics (plugins, permissions, Android build)",spike,Learning,Learning,P1,6,POC-006,"type: spike,ws: learning,priority: P1","## Summary
+Give the team enough Capacitor context to contribute safely.
+
+## Acceptance criteria
+- [ ] Explain: build pipeline, config, adding plugins
+- [ ] Explain: Android permissions + debugging tips
+- [ ] Notes captured in `/docs/onboarding.md`",,Not Started,No Capacitor onboarding notes found.
+POC-012,Spike: decide barcode scanning approach (Capacitor plugin vs web scanner) + quick Android POC,spike,Scanning,Mobile,P0,6,POC-006,"type: spike,ws: mobile,priority: P0","## Summary
+Choose the fastest reliable way to scan barcodes on Android for the POC.
+
+## Acceptance criteria
+- [ ] Evaluate 1–2 approaches (Capacitor barcode plugin vs JS camera scanner)
+- [ ] Demo scan -> returns barcode string on Android device/emulator
+- [ ] Decision recorded + minimal implementation plan
+
+## Notes
+If camera scanning is flaky, include manual entry fallback.",,Not Started,No scanner decision recorded; no Capacitor barcode plugin or web scanner implemented.
+POC-013,Feature: barcode scan flow (camera) + manual entry fallback + permissions UX,feature,Scanning,Mobile,P0,18,"POC-012,POC-003","type: feature,ws: mobile,priority: P0","## Summary
+Implement product barcode scanning in the app.
+
+## Acceptance criteria
+- [ ] Scan using camera (barcode) returns a code string
+- [ ] Manual entry fallback works (keyboard)
+- [ ] Handle permission denied gracefully
+- [ ] Works inside Capacitor Android build
+
+## Notes
+Keep UI simple; reliability > fancy UI.",,Partial,ScanningFlow UI + manual barcode entry exist; camera scanning + permissions not implemented.
+POC-014,"Backend: define data model (products, user profile, scans, checkout, points ledger, rewards)",feature,Backend,Backend,P0,10,"POC-004,POC-001","type: feature,ws: backend,priority: P0","## Summary
+Create Convex schema/tables and basic invariants.
+
+## Acceptance criteria
+- [ ] Product includes: barcode, name, health flag/score, cashback amount
+- [ ] User profile includes: current points balance (derived ok) and references
+- [ ] Points ledger records: earned/spent, reason, timestamps
+- [ ] Rewards include: name, cost points, description, image URL (optional)
+
+## Notes
+Prefer ledger + computed balance (safer than mutating balance directly).",,Not Started,No schema.ts; Convex data model is permissive (auto-generated warning).
+POC-015,Backend: seed sample products + rewards data (dev only),feature,Backend,Backend,P1,6,POC-014,"type: feature,ws: backend,priority: P1","## Summary
+Seed realistic demo data for the store and gift shop.
+
+## Acceptance criteria
+- [ ] 20–50 products with mix of healthy / cashback
+- [ ] 10 rewards items with point costs
+- [ ] One script/command to seed locally",,Not Started,No seed scripts; only static rewards array in src/data.
+POC-016,Backend: query product by barcode + return cashback/health metadata,feature,Scanning,Backend,P0,6,POC-014,"type: feature,ws: backend,priority: P0","## Summary
+Support lookup of scanned products.
+
+## Acceptance criteria
+- [ ] Convex query returns product by barcode
+- [ ] Returns “not found” error case cleanly
+- [ ] Includes cashback and health info in response",,Not Started,No product lookup query; only users.ts with getCurrentPoints.
+POC-017,Frontend: app shell + navigation (tabs or bottom nav) for <=10 pages,feature,UI,Frontend,P0,6,POC-003,"type: feature,ws: frontend,priority: P0","## Summary
+Create global navigation so feature teams can build pages independently.
+
+## Acceptance criteria
+- [ ] App shell layout + nav
+- [ ] Placeholder routes created for planned pages
+- [ ] Basic route guards integrate with auth
+
+## Notes
+Keep it mobile-first.",,Partial,"Bottom nav exists; routes exist but no auth guards, /history route missing, Navigation rendered twice."
+POC-018,"Page: Home/Dashboard (points balance, recent activity, quick ‘Scan’ CTA)",feature,UI,Frontend,P1,6,"POC-017,POC-024","type: feature,ws: frontend,priority: P1","## Summary
+Landing page after login.
+
+## Acceptance criteria
+- [ ] Shows points balance
+- [ ] Shows last 3–5 transactions (earned/spent) or empty state
+- [ ] Primary CTA to open Scan page",,Partial,Dashboard UI exists; points are mocked; scan CTA commented out; no recent transactions list.
+POC-019,"Page: Scan product (scan button, manual entry, lookup state)",feature,Scanning,Frontend,P0,10,"POC-013,POC-016,POC-017","type: feature,ws: frontend,priority: P0","## Summary
+Scan page that invokes barcode scanner and looks up product.
+
+## Acceptance criteria
+- [ ] Scan launches scanner and receives barcode
+- [ ] Manual entry works
+- [ ] Shows loading + not-found states
+- [ ] On success, navigates to Product Details",,Partial,"Product scan page exists; no backend lookup, not-found state, or Product Details route."
+POC-020,Page: Product details (health badge + cashback reward + add to basket),feature,Cashback,Frontend,P0,10,"POC-016,POC-017","type: feature,ws: frontend,priority: P0","## Summary
+Show scanned product info, and let user add it to a basket for checkout.
+
+## Acceptance criteria
+- [ ] Displays product info + “healthy” indicator
+- [ ] Displays cashback points for the product
+- [ ] Add/remove to basket works
+- [ ] Clear UX for zero-cashback products",,Not Started,No product details page/component found.
+POC-021,"Page: Basket + mock checkout (review items, ‘Pay’ mocked, complete checkout)",feature,Cashback,Frontend,P0,10,"POC-020,POC-022,POC-017","type: feature,ws: frontend,priority: P0","## Summary
+Simple cart and checkout confirmation.
+
+## Acceptance criteria
+- [ ] List scanned items + total cashback points
+- [ ] “Pay now” button triggers mock payment flow
+- [ ] After mock payment, triggers checkout completion mutation
+- [ ] Success screen / toast and clear basket",,Not Started,No basket/cart state or checkout page found.
+POC-022,Backend: checkout completion mutation + award cashback as points (ledger),feature,Cashback,Backend,P0,10,"POC-014,POC-016","type: feature,ws: backend,priority: P0","## Summary
+Award points after checkout completes (payment is mocked).
+
+## Acceptance criteria
+- [ ] Mutation takes basket items and calculates cashback points
+- [ ] Creates points ledger entries (earned)
+- [ ] Supports idempotency or prevents double-award (basic)
+- [ ] Returns updated balance + receipt/transaction id",,Not Started,No Convex checkout mutation implemented.
+POC-023,Page: Wallet (points balance + transaction history),feature,Points,Frontend,P0,10,"POC-024,POC-017","type: feature,ws: frontend,priority: P0","## Summary
+User can see points and ledger history.
+
+## Acceptance criteria
+- [ ] Shows points balance
+- [ ] Shows transaction list (earned/spent) with timestamps and reasons
+- [ ] Empty state for new users",,Partial,Wallet page exists with mock data; useToast is used but ToastProvider not mounted; no ledger data.
+POC-024,Backend: points ledger queries (balance + transaction history),feature,Points,Backend,P0,6,POC-014,"type: feature,ws: backend,priority: P0","## Summary
+Provide APIs for points balance and ledger history.
+
+## Acceptance criteria
+- [ ] Query: get current balance (derived from ledger ok)
+- [ ] Query: list recent transactions with paging/limit",,Not Started,No points ledger queries implemented in Convex.
+POC-025,Page: Gift shop list (browse rewards + point costs),feature,Gift Shop,Frontend,P1,10,"POC-015,POC-017,POC-024","type: feature,ws: frontend,priority: P1","## Summary
+Browse rewards purchasable with points.
+
+## Acceptance criteria
+- [ ] List rewards with cost + short description
+- [ ] CTA to open reward details
+- [ ] Disable/mark items user can’t afford",,Partial,Reward list page exists with local data and loading/error/empty states; no backend integration.
+POC-026,Page: Reward detail + redeem (mock fulfillment),feature,Gift Shop,Frontend,P1,10,"POC-027,POC-017","type: feature,ws: frontend,priority: P1","## Summary
+Reward details page and redeem UX.
+
+## Acceptance criteria
+- [ ] Shows reward details and cost
+- [ ] “Redeem” triggers backend mutation
+- [ ] On success, show confirmation and update wallet
+- [ ] Handle insufficient balance gracefully",,Partial,Reward details + redeem UI exists with mock flow; backend mutation TODO; ToastProvider missing.
+POC-027,Backend: redeem reward mutation (spend points + record redemption),feature,Gift Shop,Backend,P0,6,POC-014,"type: feature,ws: backend,priority: P0","## Summary
+Spending points and recording redemption.
+
+## Acceptance criteria
+- [ ] Validate balance is sufficient
+- [ ] Create ledger entry (spent)
+- [ ] Record redemption details (reward id, time)
+- [ ] Return updated balance",,Not Started,No Convex redeem mutation implemented.
+POC-028,Mock integrations: payment completion + QR flow (stub screens + fake responses),feature,Foundations,Frontend,P1,6,POC-021,"type: feature,ws: frontend,priority: P1,mocked","## Summary
+Implement mocked flows to save time.
+
+## Acceptance criteria
+- [ ] Payment is mocked (no real provider)
+- [ ] QR flow is mocked (stub UI + fake result)
+- [ ] Clear comments in code indicating mocks
+
+## Notes
+Ensure mocks are easy to replace later (thin abstraction).",,Not Started,No mock payment/QR flow screens found.
+POC-029,UI polish: loading/error/empty states + toasts + basic accessibility,chore,UI,Frontend,P1,10,"POC-018,POC-023,POC-025","type: chore,ws: frontend,priority: P1","## Summary
+Make the POC feel coherent and demo-friendly.
+
+## Acceptance criteria
+- [ ] Consistent loading states on data fetches
+- [ ] Clear empty states (no points, no history, no rewards)
+- [ ] Toasts for success/error actions (checkout, redeem)
+- [ ] Basic a11y: labels, focus states (minimal)",,Partial,"Loading/empty/error components and Toast exist, but ToastProvider not wired; styles are inconsistent."
+POC-030,QA: manual test checklist + bug bash plan (happy path + edge cases),qa,QA/Demo,QA,P1,6,"POC-021,POC-026","type: qa,ws: qa,priority: P1","## Summary
+Define how we will test this POC quickly.
+
+## Acceptance criteria
+- [ ] Checklist for each page/flow
+- [ ] Edge cases: product not found, no cashback, insufficient points, permission denied
+- [ ] Bug bash session plan + issue triage rules",,Not Started,No QA checklist or test plan found.
+POC-031,Build & release: produce installable APK + short install/run guide,feature,Mobile Build,Mobile,P0,6,"POC-006,POC-029","type: feature,ws: mobile,priority: P0","## Summary
+Create the artifact required for delivery.
+
+## Acceptance criteria
+- [ ] APK produced and stored (release assets or shared link)
+- [ ] Install instructions documented
+- [ ] Known limitations documented (mocks, permissions)",,Not Started,No APK build artifacts or instructions found.
+POC-032,"Demo readiness: demo data, walkthrough script, and contingency plan",chore,QA/Demo,PM,P0,6,"POC-031,POC-030","type: chore,ws: pm,priority: P0","## Summary
+Prepare a smooth live demo.
+
+## Acceptance criteria
+- [ ] Demo script for the happy path
+- [ ] Pre-seeded demo user / data
+- [ ] “If scan fails, use manual entry” fallback steps included",,Not Started,No demo script or demo data plan found.
+POC-033,"Documentation: contributor onboarding (how to run, env vars, common gotchas)",docs,Foundations,PM,P1,6,"POC-002,POC-004,POC-005,POC-006","type: docs,ws: pm,priority: P1","## Summary
+Ensure new contributors can get productive fast.
+
+## Acceptance criteria
+- [ ] `docs/onboarding.md` with setup steps (Clerk + Convex + Android)
+- [ ] Troubleshooting section (common issues)
+- [ ] “How to create a new page” mini-guide",,Not Started,No docs/onboarding.md; .env.example missing.
+POC-034,Integration + bugfix buffer: end-to-end happy path on Android + fixes,chore,QA/Demo,QA,P0,16,"POC-013,POC-022,POC-027,POC-029","type: chore,ws: qa,priority: P0","## Summary
+Reserve time to integrate and stabilize before demo.
+
+## Acceptance criteria
+- [ ] Happy path works end-to-end on Android
+- [ ] Critical bugs fixed (scan -> basket -> checkout -> wallet -> redeem)
+- [ ] No crashes in common flows",,Not Started,No end-to-end integration testing performed yet.
+POC-035,[Stretch] CI: GitHub Actions for lint + typecheck + build (web),chore,Foundations,PM,P2,6,POC-002,"type: chore,ws: pm,priority: P2,scope: stretch","## Summary
+Optional: basic CI to prevent broken main branch.
+
+## Acceptance criteria
+- [ ] Workflow runs on PRs
+- [ ] Lint + typecheck + web build steps included",,Not Started,No GitHub Actions workflows found.
+POC-036,[Stretch] CI: build Android APK in GitHub Actions,chore,Mobile Build,Mobile,P2,10,POC-006,"type: chore,ws: mobile,priority: P2,scope: stretch","## Summary
+Optional: automate APK build in CI.
+
+## Acceptance criteria
+- [ ] Workflow produces APK artifact
+- [ ] Document secrets/keystore requirements (if release build)",,Not Started,No CI workflow for Android build found.
