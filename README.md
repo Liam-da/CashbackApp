@@ -60,3 +60,18 @@ which point this section will include deployment + local dev instructions.
 ## Styling Approach
 Global styles live in `src/styles/globals.css` (Tailwind + design tokens).
 Avoid adding additional global CSS files; prefer Tailwind and `src/ui/*`.
+
+## Screenshots
+
+### Home Page
+![HomePage](assets/screenshots/HomePage.jpg)
+
+### Barcode Scanning
+![Barcode Scanning](assets/screenshots/Barcode-scanning.jpg)
+
+### Manual Barcode Entry
+![Manual Barcode Entry](assets/screenshots/manuel barcode-indtastning.jpg)
+
+### Point History
+![Point History](assets/screenshots/point historic.jpg)
+
